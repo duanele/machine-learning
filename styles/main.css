@@ -1,4 +1,33 @@
 
 /* Styles */
 
+article#reasonable-people div#chart {
+  background: #eee;
+  width: 1500px;
+}
+article#reasonable-people span.person {
+  width: 15px;
+  height: 15px;
+  margin-left: 5px;
+  display: inline-block;
+}
+article#reasonable-people span.go {
+  background: #008000;
+}
+
+article#reasonable-people span.lastWeek {
+  background: #ff0;
+}
+article#reasonable-people span.historicalTrend {
+  background: #87ceeb;
+}
+article#reasonable-people span.historicalMean {
+  background: #fa8072;
+}
+article#reasonable-people span.historicalMedian {
+  background: #008080;
+}
+article#reasonable-people span.person.contrarian {
+  outline: 2px dotted #808080;
+}
 

@@ -29,6 +29,8 @@
 */
 
 
+
+
 // The algorithms, defined as functions below, that people can use as predictors.
 var baseAlgos = [go, lastWeek, historicalMean,historicalMedian,historicalTrend]
 
@@ -49,7 +51,19 @@ people.forEach( function(person) {
 peopleByType.sort();
 console.log(peopleByType);
 
-
+people.sort( function (a,b) {
+    if (a.method.algo.name < b.method.algo.name) {return -1}
+    else if (a.method.algo.name > b.method.algo.name) {return 1}
+    else {
+      if (a.method.memSpan < b.method.memSpan) {return -1}
+      else if (a.method.memSpan > b.method.memSpan) {return 1}
+      else { 
+        if (a.method.contrian < b.method.contrarian) {return -1}
+        else if (a.method.contrarian > b.method.contrian) {return 1}
+        else {return 0} 
+      }
+    }
+  })
 /*
  * PERSON MAKER
  * @param {string} model - the final html to send
@@ -164,4 +178,23 @@ function historicalTrend(history){
 function isInRange(prediction) {
 return prediction >= 35 && prediction <= 65;
 }
+
+
+var chart = document.getElementById("chart")
+var numberSpan = `<span class="number">{{number}}</span>`;
+var htmlString = ""
+barAttendanceHistory.forEach( function(entry,index) {
+  var num = `<span class="number">${entry}</span>`
+  var peopleString = ""
+  people.forEach( function(player){
+    if (player.record.attendance[index-3]) {
+      var person = `<span class="person ${player.method.algo.name} ${player.method.contrarian ? 'contrarian' : ''}"></span>`
+      peopleString += person
+    }
+  })
+  var peeps = `<span class="people">${peopleString}</span>`
+  var row = `<div class="row">${num} ${peeps}</div>`
+  htmlString += row
+})
+chart.innerHTML = htmlString
 
